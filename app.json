@@ -1,0 +1,17 @@
+{
+  "name": "SurveyApp",
+  "displayName": "SurveyApp",
+  "expo": {
+    "name": "SurveyApp",
+    "slug": "SurveyApp",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
