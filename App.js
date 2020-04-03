@@ -1,14 +1,20 @@
 import * as React from 'react';
 import { Formik } from 'formik';
-import { Alert, Keyboard, Text, View, StyleSheet } from 'react-native';
+import { Alert, Keyboard, View, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
-import { Button, TextInput, Appbar } from 'react-native-paper';
+import { RadioButton, Text, Button, TextInput, Appbar } from 'react-native-paper';
 import { Field, Form, useField, FieldAttributes, FieldArray } from 'formik';
 import * as yup from "yup";
+import { CityList } from './cityList';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
+export default class MyComponent extends React.Component {
+  state = {
+    value: 'first',
+  };
+
+  render() {
+    return(
+      <View style={styles.container}>
       <View style={styles.content}>
           <Formik 
             initialValues={{ fullName: '' , occupation: '', birthDate: '', city: '', gender: ''}} 
@@ -34,18 +40,30 @@ export default function App() {
                 value={values.birthDate}
                 label="Birth Date"
               />
-              <TextInput style={styles.field}
+              <TextInput style={styles.field} validate={CityList.isCity} 
                 onChangeText={handleChange('city')}
                 value={values.city}
                 label="City"
               />
+              <RadioButton.Group
+                onValueChange={value => this.setState({ value })}
+                value={this.state.value}
+              >
+                <View style={styles.radCont}>
+                  <Text style={styles.text}>Male</Text>
+                  <RadioButton value="male" />
+                  <Text style={styles.text}>Female</Text>
+                  <RadioButton  value="female" />
+                </View>
+              </RadioButton.Group>
               <Button onPress={handleSubmit} style={styles.button}>Submit</Button>
               </View>
             )}
           </Formik>
         </View>
     </View>
-  );
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -64,5 +82,11 @@ const styles = StyleSheet.create({
   field: {
     marginBottom: 16,
   },
+  text: {
+    color: '#868686',
+  },
+  radCont: {
+    backgroundColor: '#e7e7e7',
+  }
 
 });
