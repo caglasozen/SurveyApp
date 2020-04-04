@@ -33,50 +33,50 @@ export default class MyComponent extends React.Component {
             }>
             {({ handleChange, handleSubmit, values }) => (
               <View>
-              <HelperText 
-                type="error"
-                visible={this.nameError ? true : false}
-              >
-                Name is invalid!
-             </HelperText>
               <TextInput accessibilityLabel={ 'fullNameField' } testID={ 'fullNameField' } style={this.nameError ? styles.error : styles.field} 
                 onChangeText={handleChange('fullName')}
                 value={values.fullName}
                 label="Full Name"
               />
-              <HelperText 
+              <HelperText accessibilityLabel={ 'nameError' } testID={ 'nameError' } 
                 type="error"
-                visible={this.occupError ? true : false}
+                visible={this.nameError ? true : false}
               >
-                Occupation is invalid!
+                Name is invalid!
              </HelperText>
               <TextInput accessibilityLabel={ 'occupationField' } testID={ 'occupationField' } style={this.occupError ? styles.error : styles.field}
                 onChangeText={handleChange('occupation')}
                 value={values.occupation}
                 label="Occupation"
               />
-              <HelperText 
+              <HelperText accessibilityLabel={ 'occupError' } testID={ 'occupError' } 
                 type="error"
-                visible={this.dateError ? true : false}
+                visible={this.occupError ? true : false}
               >
-                Date is invalid!
+                Occupation is invalid!
              </HelperText>
               <TextInput accessibilityLabel={ 'birthDateField' } testID={ 'birthDateField' } style={this.birthDate ? styles.error : styles.field}
                 onChangeText={handleChange('birthDate')}
                 value={values.birthDate}
                 label="Birth Date"
               />
-              <HelperText 
+              <HelperText accessibilityLabel={ 'dateError' } testID={ 'dateError' } 
                 type="error"
-                visible={this.cityError ? true : false}
+                visible={this.dateError ? true : false}
               >
-                City is invalid!
+                Date is invalid!
              </HelperText>
               <TextInput accessibilityLabel={ 'cityField' } testID={ 'cityField' } style={this.nameError ? styles.error : styles.field}
                 onChangeText={handleChange('city')}
                 value={values.city}
                 label="City"
               />
+              <HelperText accessibilityLabel={ 'cityError' } testID={ 'cityError' } 
+                type="error"
+                visible={this.cityError ? true : false}
+              >
+                City is invalid!
+             </HelperText>
               <RadioButton.Group accessibilityLabel={ 'radioField' } testID={ 'radioField' }
                 onValueChange={handleChange('gender')}
                 value={values.gender}
@@ -122,5 +122,8 @@ const styles = StyleSheet.create({
   radCont: {
     marginTop: 16,
     backgroundColor: '#e7e7e7',
+  },
+  error: {
+    backgroundColor: '#fcacac',
   },
 });
