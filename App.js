@@ -4,59 +4,65 @@ import { Alert, Keyboard, View, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
 import { RadioButton, Text, Button, TextInput, Appbar } from 'react-native-paper';
 import { Field, Form, useField, FieldAttributes, FieldArray } from 'formik';
-import * as yup from "yup";
-import { CityList } from './cityList';
+import { ValidFunctions } from './validFunctions';
+
 
 export default class MyComponent extends React.Component {
   state = {
     value: 'first',
+    buttonDisabled: true,
   };
 
   render() {
     return(
       <View style={styles.container}>
       <View style={styles.content}>
-          <Formik 
+          <Formik accessibilityLabel={ 'FormikForm' } testID={ 'FormikForm' }
             initialValues={{ fullName: '' , occupation: '', birthDate: '', city: '', gender: ''}} 
             onSubmit={values => {
+                Alert.alert(ValidFunctions.validateName(values.fullName));
+                Alert.alert(ValidFunctions.validateOccupation(values.occupation));
+                Alert.alert(ValidFunctions.validateCity(values.city));
                 Alert.alert(JSON.stringify(values, null, 2));
                 Keyboard.dismiss();
               }
             }>
             {({ handleChange, handleSubmit, values }) => (
               <View>
-              <TextInput style={styles.field}
+              <TextInput accessibilityLabel={ 'fullNameField' } testID={ 'fullNameField' } style={styles.field} 
                 onChangeText={handleChange('fullName')}
                 value={values.fullName}
                 label="Full Name"
               />
-              <TextInput style={styles.field}
+              <TextInput accessibilityLabel={ 'occupationField' } testID={ 'occupationField' } style={styles.field} 
                 onChangeText={handleChange('occupation')}
                 value={values.occupation}
                 label="Occupation"
               />
-              <TextInput style={styles.field}
+              <TextInput accessibilityLabel={ 'birthDateField' } testID={ 'birthDateField' } style={styles.field}
                 onChangeText={handleChange('birthDate')}
                 value={values.birthDate}
                 label="Birth Date"
               />
-              <TextInput style={styles.field} validate={CityList.isCity} 
+              <TextInput accessibilityLabel={ 'cityField' } testID={ 'cityField' } style={styles.field} 
                 onChangeText={handleChange('city')}
                 value={values.city}
                 label="City"
               />
-              <RadioButton.Group
+              <RadioButton.Group accessibilityLabel={ 'radioField' } testID={ 'radioField' }
                 onValueChange={value => this.setState({ value })}
                 value={this.state.value}
               >
                 <View style={styles.radCont}>
-                  <Text style={styles.text}>Male</Text>
+                  <Text accessibilityLabel={ 'radioFieldMale' } testID={ 'radioFieldMale' } style={styles.text}>Male</Text>
                   <RadioButton value="male" />
-                  <Text style={styles.text}>Female</Text>
+                  <Text accessibilityLabel={ 'radioFieldFemale' } testID={ 'radioFieldFemale' } style={styles.text}>Female</Text>
                   <RadioButton  value="female" />
                 </View>
               </RadioButton.Group>
-              <Button onPress={handleSubmit} style={styles.button}>Submit</Button>
+              {values.fullName !== '' && values.occupation !== '' && values.birthDate !== '' && values.city !== '' && (
+                <Button accessibilityLabel={ 'submitButton' } testID={ 'submitButton' } onPress={handleSubmit} style={styles.button}>Submit</Button>
+            )}
               </View>
             )}
           </Formik>
@@ -64,7 +70,10 @@ export default class MyComponent extends React.Component {
     </View>
     )
   }
+
 }
+
+
 
 const styles = StyleSheet.create({
   container: {

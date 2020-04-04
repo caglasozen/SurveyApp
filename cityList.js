@@ -23022,9 +23022,5 @@ export class CityList extends React.Component {
     "EPWORTH",
     "CHITUNGWIZA",
   ];
-
-  static isCity(cityName) {
-    return cities.includes(cityName.toUpperCase());
-  }
 }
 
