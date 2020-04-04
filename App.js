@@ -27,6 +27,7 @@ export default class MyComponent extends React.Component {
                 this.nameError = ValidFunctions.validateName(values.fullName);
                 this.occupError = ValidFunctions.validateOccupation(values.occupation);
                 this.cityError = ValidFunctions.validateCity(values.city);
+                this.dateError = ValidFunctions.validateDate(values.birthDate);
                 Alert.alert(JSON.stringify(values, null, 2));
                 Keyboard.dismiss();
               }
@@ -44,6 +45,7 @@ export default class MyComponent extends React.Component {
               >
                 Name is invalid!
              </HelperText>
+
               <TextInput accessibilityLabel={ 'occupationField' } testID={ 'occupationField' } style={this.occupError ? styles.error : styles.field}
                 onChangeText={handleChange('occupation')}
                 value={values.occupation}
@@ -55,7 +57,8 @@ export default class MyComponent extends React.Component {
               >
                 Occupation is invalid!
              </HelperText>
-              <TextInput accessibilityLabel={ 'birthDateField' } testID={ 'birthDateField' } style={this.birthDate ? styles.error : styles.field}
+             
+              <TextInput accessibilityLabel={ 'birthDateField' } testID={ 'birthDateField' } style={this.dateError ? styles.error : styles.field}
                 onChangeText={handleChange('birthDate')}
                 value={values.birthDate}
                 label="Birth Date"
@@ -66,7 +69,8 @@ export default class MyComponent extends React.Component {
               >
                 Date is invalid!
              </HelperText>
-              <TextInput accessibilityLabel={ 'cityField' } testID={ 'cityField' } style={this.nameError ? styles.error : styles.field}
+
+              <TextInput accessibilityLabel={ 'cityField' } testID={ 'cityField' } style={this.cityError ? styles.error : styles.field}
                 onChangeText={handleChange('city')}
                 value={values.city}
                 label="City"
@@ -77,6 +81,7 @@ export default class MyComponent extends React.Component {
               >
                 City is invalid!
              </HelperText>
+             
               <RadioButton.Group accessibilityLabel={ 'radioField' } testID={ 'radioField' }
                 onValueChange={handleChange('gender')}
                 value={values.gender}
