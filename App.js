@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Formik } from 'formik';
 import { Alert, Keyboard, View, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
-import { RadioButton, Text, Button, TextInput, Appbar } from 'react-native-paper';
+import { HelperText, RadioButton, Text, Button, TextInput, Appbar } from 'react-native-paper';
 import { Field, Form, useField, FieldAttributes, FieldArray } from 'formik';
 import { ValidFunctions } from './validFunctions';
 
@@ -11,7 +11,10 @@ export default class MyComponent extends React.Component {
   state = {
     value: 'first',
     buttonDisabled: true,
-    errors: [],
+    nameError: null,
+    occupError: null,
+    dateError: null,
+    cityError: null,
   };
 
   render() {
@@ -21,31 +24,55 @@ export default class MyComponent extends React.Component {
           <Formik accessibilityLabel={ 'FormikForm' } testID={ 'FormikForm' }
             initialValues={{ fullName: '' , occupation: '', birthDate: '', city: '', gender: ''}} 
             onSubmit={values => {
-                //errors.push(ValidFunctions.validateName(values.fullName));
-                //errors.push(ValidFunctions.validateOccupation(values.occupation));
-                //errors.push(ValidFunctions.validateCity(values.city));
+                this.nameError = ValidFunctions.validateName(values.fullName);
+                this.occupError = ValidFunctions.validateOccupation(values.occupation);
+                this.cityError = ValidFunctions.validateCity(values.city);
                 Alert.alert(JSON.stringify(values, null, 2));
                 Keyboard.dismiss();
               }
             }>
             {({ handleChange, handleSubmit, values }) => (
               <View>
-              <TextInput accessibilityLabel={ 'fullNameField' } testID={ 'fullNameField' } style={styles.field} 
+              <HelperText 
+                type="error"
+                visible={this.nameError ? true : false}
+              >
+                Name is invalid!
+             </HelperText>
+              <TextInput accessibilityLabel={ 'fullNameField' } testID={ 'fullNameField' } style={this.nameError ? styles.error : styles.field} 
                 onChangeText={handleChange('fullName')}
                 value={values.fullName}
                 label="Full Name"
               />
-              <TextInput accessibilityLabel={ 'occupationField' } testID={ 'occupationField' } style={styles.field} 
+              <HelperText 
+                type="error"
+                visible={this.occupError ? true : false}
+              >
+                Occupation is invalid!
+             </HelperText>
+              <TextInput accessibilityLabel={ 'occupationField' } testID={ 'occupationField' } style={this.occupError ? styles.error : styles.field}
                 onChangeText={handleChange('occupation')}
                 value={values.occupation}
                 label="Occupation"
               />
-              <TextInput accessibilityLabel={ 'birthDateField' } testID={ 'birthDateField' } style={styles.field}
+              <HelperText 
+                type="error"
+                visible={this.dateError ? true : false}
+              >
+                Date is invalid!
+             </HelperText>
+              <TextInput accessibilityLabel={ 'birthDateField' } testID={ 'birthDateField' } style={this.birthDate ? styles.error : styles.field}
                 onChangeText={handleChange('birthDate')}
                 value={values.birthDate}
                 label="Birth Date"
               />
-              <TextInput accessibilityLabel={ 'cityField' } testID={ 'cityField' } style={styles.field} 
+              <HelperText 
+                type="error"
+                visible={this.cityError ? true : false}
+              >
+                City is invalid!
+             </HelperText>
+              <TextInput accessibilityLabel={ 'cityField' } testID={ 'cityField' } style={this.nameError ? styles.error : styles.field}
                 onChangeText={handleChange('city')}
                 value={values.city}
                 label="City"
@@ -71,10 +98,7 @@ export default class MyComponent extends React.Component {
     </View>
     )
   }
-
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -90,17 +114,13 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   field: {
-    marginBottom: 16,
+    marginBottom: 0,
   },
   text: {
     color: '#868686',
   },
   radCont: {
+    marginTop: 16,
     backgroundColor: '#e7e7e7',
   },
-  error: {
-    padding: 16,
-    marginTop: 100,
-  }
-
 });

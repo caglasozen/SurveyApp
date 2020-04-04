@@ -25,7 +25,7 @@ export class ValidFunctions{
     let error;
     if (!value) {
         error = 'City is Required';
-    } else if (!CityList.cities.includes(value.toUpperCase())) {
+    } else if (!CityList.isCity(value)) {
         error = 'Invalid city ';
     }
     return error;
