@@ -54,10 +54,10 @@ export default class MyComponent extends React.Component {
                 value={this.state.value}
               >
                 <View style={styles.radCont}>
-                  <Text accessibilityLabel={ 'radioFieldMale' } testID={ 'radioFieldMale' } style={styles.text}>Male</Text>
-                  <RadioButton value="male" />
-                  <Text accessibilityLabel={ 'radioFieldFemale' } testID={ 'radioFieldFemale' } style={styles.text}>Female</Text>
-                  <RadioButton  value="female" />
+                  <Text style={styles.text}>Male</Text>
+                  <RadioButton  accessibilityLabel={ 'radioFieldMale' } testID={ 'radioFieldMale' }  value="male" />
+                  <Text style={styles.text}>Female</Text>
+                  <RadioButton accessibilityLabel={ 'radioFieldFemale' } testID={ 'radioFieldFemale' } value="female" />
                 </View>
               </RadioButton.Group>
               {values.fullName !== '' && values.occupation !== '' && values.birthDate !== '' && values.city !== '' && (
