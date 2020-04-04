@@ -11,6 +11,7 @@ export default class MyComponent extends React.Component {
   state = {
     value: 'first',
     buttonDisabled: true,
+    errors: [],
   };
 
   render() {
@@ -20,9 +21,9 @@ export default class MyComponent extends React.Component {
           <Formik accessibilityLabel={ 'FormikForm' } testID={ 'FormikForm' }
             initialValues={{ fullName: '' , occupation: '', birthDate: '', city: '', gender: ''}} 
             onSubmit={values => {
-                Alert.alert(ValidFunctions.validateName(values.fullName));
-                Alert.alert(ValidFunctions.validateOccupation(values.occupation));
-                Alert.alert(ValidFunctions.validateCity(values.city));
+                //errors.push(ValidFunctions.validateName(values.fullName));
+                //errors.push(ValidFunctions.validateOccupation(values.occupation));
+                //errors.push(ValidFunctions.validateCity(values.city));
                 Alert.alert(JSON.stringify(values, null, 2));
                 Keyboard.dismiss();
               }
@@ -50,8 +51,8 @@ export default class MyComponent extends React.Component {
                 label="City"
               />
               <RadioButton.Group accessibilityLabel={ 'radioField' } testID={ 'radioField' }
-                onValueChange={value => this.setState({ value })}
-                value={this.state.value}
+                onValueChange={handleChange('gender')}
+                value={values.gender}
               >
                 <View style={styles.radCont}>
                   <Text style={styles.text}>Male</Text>
@@ -60,7 +61,7 @@ export default class MyComponent extends React.Component {
                   <RadioButton accessibilityLabel={ 'radioFieldFemale' } testID={ 'radioFieldFemale' } value="female" />
                 </View>
               </RadioButton.Group>
-              {values.fullName !== '' && values.occupation !== '' && values.birthDate !== '' && values.city !== '' && (
+              {values.fullName !== '' && values.occupation !== '' && values.birthDate !== '' && values.city !== '' && values.gender !== '' &&(
                 <Button accessibilityLabel={ 'submitButton' } testID={ 'submitButton' } onPress={handleSubmit} style={styles.button}>Submit</Button>
             )}
               </View>
@@ -96,6 +97,10 @@ const styles = StyleSheet.create({
   },
   radCont: {
     backgroundColor: '#e7e7e7',
+  },
+  error: {
+    padding: 16,
+    marginTop: 100,
   }
 
 });
