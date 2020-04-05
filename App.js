@@ -5,16 +5,17 @@ import { Constants } from 'expo';
 import { HelperText, RadioButton, Text, Button, TextInput, Appbar } from 'react-native-paper';
 import { Field, Form, useField, FieldAttributes, FieldArray } from 'formik';
 import { ValidFunctions } from './validFunctions';
-
+import { TextInputMask } from 'react-native-masked-text'
 
 export default class MyComponent extends React.Component {
   state = {
     value: 'first',
-    buttonDisabled: true,
     nameError: null,
     occupError: null,
     dateError: null,
     cityError: null,
+    userInput: '',
+    dt: '',
   };
 
   render() {
@@ -27,7 +28,7 @@ export default class MyComponent extends React.Component {
                 this.nameError = ValidFunctions.validateName(values.fullName);
                 this.occupError = ValidFunctions.validateOccupation(values.occupation);
                 this.cityError = ValidFunctions.validateCity(values.city);
-                this.dateError = ValidFunctions.validateDate(values.birthDate);
+                this.dateError = ValidFunctions.validateDate(this.dt);
                 Alert.alert(JSON.stringify(values, null, 2));
                 Keyboard.dismiss();
               }
@@ -38,6 +39,7 @@ export default class MyComponent extends React.Component {
                 onChangeText={handleChange('fullName')}
                 value={values.fullName}
                 label="Full Name"
+                maxLength={30}
               />
               <HelperText accessibilityLabel={ 'nameError' } testID={ 'nameError' } 
                 type="error"
@@ -50,6 +52,7 @@ export default class MyComponent extends React.Component {
                 onChangeText={handleChange('occupation')}
                 value={values.occupation}
                 label="Occupation"
+                maxLength={30}
               />
               <HelperText accessibilityLabel={ 'occupError' } testID={ 'occupError' } 
                 type="error"
@@ -57,12 +60,25 @@ export default class MyComponent extends React.Component {
               >
                 Occupation is invalid!
              </HelperText>
-             
-              <TextInput accessibilityLabel={ 'birthDateField' } testID={ 'birthDateField' } style={this.dateError ? styles.error : styles.field}
-                onChangeText={handleChange('birthDate')}
-                value={values.birthDate}
+             <View style={styles.field}>
+              <TextInputMask accessibilityLabel={ 'birthDateField' } testID={ 'birthDateField' } style={this.dateError ? styles.error : styles.field}
+                type={'datetime'}
+                options={{
+                  format: 'DD/MM/YYYY'
+                }}
+                value={this.state.dt}
+                onChangeText={text => {
+                  this.setState({
+                    dt: text
+                  })
+                }}
                 label="Birth Date"
+                placeholder = 'dd/mm/yyyy'
+                keyboardType = 'numeric'
+                style={styles.input}
               />
+            </View>
+             
               <HelperText accessibilityLabel={ 'dateError' } testID={ 'dateError' } 
                 type="error"
                 visible={this.dateError ? true : false}
@@ -74,6 +90,7 @@ export default class MyComponent extends React.Component {
                 onChangeText={handleChange('city')}
                 value={values.city}
                 label="City"
+                maxLength={30}
               />
               <HelperText accessibilityLabel={ 'cityError' } testID={ 'cityError' } 
                 type="error"
@@ -81,7 +98,7 @@ export default class MyComponent extends React.Component {
               >
                 City is invalid!
              </HelperText>
-             
+
               <RadioButton.Group accessibilityLabel={ 'radioField' } testID={ 'radioField' }
                 onValueChange={handleChange('gender')}
                 value={values.gender}
@@ -93,7 +110,7 @@ export default class MyComponent extends React.Component {
                   <RadioButton accessibilityLabel={ 'radioFieldFemale' } testID={ 'radioFieldFemale' } value="female" />
                 </View>
               </RadioButton.Group>
-              {values.fullName !== '' && values.occupation !== '' && values.birthDate !== '' && values.city !== '' && values.gender !== '' &&(
+              {values.fullName !== '' && values.occupation !== '' && this.dt !== '' && values.city !== '' && values.gender !== '' &&(
                 <Button accessibilityLabel={ 'submitButton' } testID={ 'submitButton' } onPress={handleSubmit} style={styles.button}>Submit</Button>
             )}
               </View>
@@ -130,5 +147,10 @@ const styles = StyleSheet.create({
   },
   error: {
     backgroundColor: '#fcacac',
+  },
+  input: {
+    color: '#868686',
+    height: 50,
+    width: '90%'
   },
 });

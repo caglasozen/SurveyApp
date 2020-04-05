@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@buttercup/react-formatted-input": "^1.3.0",
     "@material-ui/core": "^4.9.8",
     "@material-ui/icons": "^4.9.1",
     "classnames": "^2.2.6",
@@ -18,9 +19,11 @@
     "react-dom": "~16.9.0",
     "react-native": "~0.61.4",
     "react-native-gesture-handler": "~1.6.0",
+    "react-native-masked-text": "^1.13.0",
     "react-native-paper": "^3.6.0",
     "react-native-reanimated": "~1.7.0",
     "react-native-screens": "~2.2.0",
+    "react-native-text-input-mask": "^2.0.0",
     "react-native-unimodules": "~0.9.0",
     "react-native-web": "~0.11.7",
     "yup": "^0.28.3"

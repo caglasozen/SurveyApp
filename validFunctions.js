@@ -2,7 +2,6 @@ import React from 'react'
 import { CityList } from './cityList';
 import { Alert} from 'react-native';
 
-
 export class ValidFunctions{
 
     static validateName(value){
@@ -28,11 +27,11 @@ export class ValidFunctions{
 
         var today = new Date();
 
-        var m = value.substring(3,5)-1;
-        var y = value.substring(value.length - 4, value.length);
-        var d = value.substring(0, 2);
+        //var m = value.substring(3,5)-1;
+        //var y = value.substring(value.length - 4, value.length);
+        //var d = value.substring(0, 2);
 
-        var dt = new Date(y,m,d,0,0,0,0);
+        var dt = value;
 
         var mon = dt.getMonth() + 1;
         var day = dt.getDate();
