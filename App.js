@@ -34,7 +34,7 @@ export default class MyComponent extends React.Component {
                 this.occupError = ValidFunctions.validateOccupation(values.occupation);
                 this.cityError = ValidFunctions.validateCity(values.city);
                 this.dateError = ValidFunctions.validateDate(this.datetime);
-                Alert.alert(JSON.stringify(values, null, 2) + 'birthDate' + this.datetime);
+                Alert.alert('Success!' + JSON.stringify(values, null, 2) + ' birthDate ' + this.datetime);
                 Keyboard.dismiss();
               }
             }>
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: '#ffffff',
-    fontFamily: 'Futura-MediumItalic',
+    fontFamily: 'Futura-Medium',
     marginTop: 50,
     textAlign: 'center',
     fontSize: 30,
