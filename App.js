@@ -34,7 +34,9 @@ export default class MyComponent extends React.Component {
                 this.occupError = ValidFunctions.validateOccupation(values.occupation);
                 this.cityError = ValidFunctions.validateCity(values.city);
                 this.dateError = ValidFunctions.validateDate(this.datetime);
-                Alert.alert('Success!' + JSON.stringify(values, null, 2) + ' birthDate ' + this.datetime);
+                if((this.nameError == null && this.occupError == null && this.cityError == null && this.dateError == null) )
+                  Alert.alert('Success!' + JSON.stringify(values, null, 2) + ' birthDate ' + this.datetime);
+                this.setState({ state: this.state });
                 Keyboard.dismiss();
               }
             }>
