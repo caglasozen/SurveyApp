@@ -63,6 +63,7 @@ export default class MyComponent extends React.Component {
                 Occupation is invalid!
              </HelperText>
 
+             <Text style={styles.text}>Birth Date</Text>
              <View style={styles.field}>
               <TextInputMask accessibilityLabel={ 'birthDateField' } testID={ 'birthDateField' } style={this.dateError ? styles.error : styles.input}
                 type={'datetime'}
@@ -110,6 +111,7 @@ export default class MyComponent extends React.Component {
                 onValueChange={handleChange('gender')}
                 value={values.gender}
               >
+                <Text style={styles.text}>Gender</Text>
                 <View style={styles.radCont}>
                   <Text style={styles.text}>Male</Text>
                   <RadioButton  accessibilityLabel={ 'radioFieldMale' } testID={ 'radioFieldMale' }  value="male" />
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
     color: '#868686',
   },
   radCont: {
-    marginTop: 16,
+    marginTop: 0,
     backgroundColor: '#e7e7e7',
     borderBottomColor: '#868686',
     borderBottomWidth: 1,
