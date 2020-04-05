@@ -144,13 +144,17 @@ const styles = StyleSheet.create({
   radCont: {
     marginTop: 16,
     backgroundColor: '#e7e7e7',
+    borderBottomColor: '#868686',
+    borderBottomWidth: 1,
   },
   error: {
     backgroundColor: '#fcacac',
   },
   input: {
     color: '#868686',
-    height: 50,
-    width: '90%'
+    backgroundColor: '#e7e7e7',
+    height: 60,
+    borderBottomColor: '#868686',
+    borderBottomWidth: 1,
   },
 });
