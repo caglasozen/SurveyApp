@@ -77,6 +77,8 @@ export default class MyComponent extends React.Component {
                   this.datetime = text;
                   if (text.length == 10)
                     this.dateFilled = true;
+                  else 
+                    this.dateFilled = false;
                 }}
                 label="Birth Date"
                 placeholder = 'dd/mm/yyyy'
