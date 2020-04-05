@@ -1,6 +1,4 @@
-import React from 'react'
 import { CityList } from './cityList';
-import { Alert} from 'react-native';
 
 export class ValidFunctions{
 

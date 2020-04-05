@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { Formik } from 'formik';
 import { Alert, Keyboard, View, StyleSheet } from 'react-native';
-import { Constants } from 'expo';
 import { HelperText, RadioButton, Text, Button, TextInput, Appbar } from 'react-native-paper';
-import { Field, Form, useField, FieldAttributes, FieldArray } from 'formik';
 import { ValidFunctions } from './validFunctions';
 import { TextInputMask } from 'react-native-masked-text'
 
