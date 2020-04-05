@@ -23,6 +23,9 @@ export default class MyComponent extends React.Component {
   render() {
     return(
       <View style={styles.container}>
+      <View style={styles.header}>
+      <Text style={styles.headerText}>SURVEY APP</Text>
+      </View>
       <View style={styles.content}>
           <Formik accessibilityLabel={ 'FormikForm' } testID={ 'FormikForm' }
             initialValues={{ fullName: '' , occupation: '', city: '', gender: ''}} 
@@ -85,6 +88,7 @@ export default class MyComponent extends React.Component {
                 placeholder = 'dd/mm/yyyy'
                 keyboardType = 'numeric'
               />
+              
             </View>
              
               <HelperText accessibilityLabel={ 'dateError' } testID={ 'dateError' } 
@@ -107,14 +111,14 @@ export default class MyComponent extends React.Component {
                 City is invalid!
              </HelperText>
 
-              <RadioButton.Group accessibilityLabel={ 'radioField' } testID={ 'radioField' }
+              <RadioButton.Group accessibilityLabel={ 'radioField' } testID={ 'radioField' } 
                 onValueChange={handleChange('gender')}
                 value={values.gender}
               >
                 <Text style={styles.text}>Gender</Text>
                 <View style={styles.radCont}>
-                  <Text style={styles.text}>Male</Text>
-                  <RadioButton  accessibilityLabel={ 'radioFieldMale' } testID={ 'radioFieldMale' }  value="male" />
+                  <Text style={styles.radButton}>Male </Text>
+                  <RadioButton  accessibilityLabel={ 'radioFieldMale' } testID={ 'radioFieldMale' } value="male" />
                   <Text style={styles.text}>Female</Text>
                   <RadioButton accessibilityLabel={ 'radioFieldFemale' } testID={ 'radioFieldFemale' } value="female" />
                 </View>
@@ -132,6 +136,19 @@ export default class MyComponent extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    height: 100,
+    backgroundColor: '#9340ff',
+    marginTop: 0,
+    marginBottom:0,
+  },
+  headerText: {
+    color: '#ffffff',
+    fontFamily: 'Futura-MediumItalic',
+    marginTop: 50,
+    textAlign: 'center',
+    fontSize: 30,
+  },
   container: {
     flex: 1,
     backgroundColor: '#ecf0f1',
@@ -139,7 +156,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 16,
-    marginTop: 100,
+    marginTop: 0,
   },
   button: {
     marginTop: 16,
@@ -149,6 +166,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#868686',
+    marginTop: -10,
   },
   radCont: {
     marginTop: 0,
@@ -169,5 +187,9 @@ const styles = StyleSheet.create({
     height: 60,
     borderBottomColor: '#868686',
     borderBottomWidth: 1,
+  },
+  radButton: {
+    color: '#868686',
+    marginTop: 0,
   },
 });
