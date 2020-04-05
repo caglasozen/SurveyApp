@@ -17,6 +17,7 @@ export default class MyComponent extends React.Component {
     userInput: '',
     dt: '',
     datetime: '',
+    dateFilled: false,
   };
 
   render() {
@@ -73,7 +74,9 @@ export default class MyComponent extends React.Component {
                   this.setState({
                     dt: text
                   });
-                  this.datetime = text
+                  this.datetime = text;
+                  if (text.length == 10)
+                    this.dateFilled = true;
                 }}
                 label="Birth Date"
                 placeholder = 'dd/mm/yyyy'
@@ -112,7 +115,7 @@ export default class MyComponent extends React.Component {
                   <RadioButton accessibilityLabel={ 'radioFieldFemale' } testID={ 'radioFieldFemale' } value="female" />
                 </View>
               </RadioButton.Group>
-              {values.fullName !== '' && values.occupation !== '' && this.datetime !== '' && values.city !== '' && values.gender !== '' &&(
+              {values.fullName !== '' && values.occupation !== '' && this.dateFilled && values.city !== '' && values.gender !== '' &&(
                 <Button accessibilityLabel={ 'submitButton' } testID={ 'submitButton' } onPress={handleSubmit} style={styles.button}>Submit</Button>
             )}
               </View>
