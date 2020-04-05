@@ -16,6 +16,7 @@ export default class MyComponent extends React.Component {
     cityError: null,
     userInput: '',
     dt: '',
+    datetime: '',
   };
 
   render() {
@@ -23,13 +24,13 @@ export default class MyComponent extends React.Component {
       <View style={styles.container}>
       <View style={styles.content}>
           <Formik accessibilityLabel={ 'FormikForm' } testID={ 'FormikForm' }
-            initialValues={{ fullName: '' , occupation: '', birthDate: '', city: '', gender: ''}} 
+            initialValues={{ fullName: '' , occupation: '', city: '', gender: ''}} 
             onSubmit={values => {
                 this.nameError = ValidFunctions.validateName(values.fullName);
                 this.occupError = ValidFunctions.validateOccupation(values.occupation);
                 this.cityError = ValidFunctions.validateCity(values.city);
-                this.dateError = ValidFunctions.validateDate(this.dt);
-                Alert.alert(JSON.stringify(values, null, 2));
+                this.dateError = ValidFunctions.validateDate(this.datetime);
+                Alert.alert(JSON.stringify(values, null, 2) + 'birthDate' + this.datetime);
                 Keyboard.dismiss();
               }
             }>
@@ -60,8 +61,9 @@ export default class MyComponent extends React.Component {
               >
                 Occupation is invalid!
              </HelperText>
+
              <View style={styles.field}>
-              <TextInputMask accessibilityLabel={ 'birthDateField' } testID={ 'birthDateField' } style={this.dateError ? styles.error : styles.field}
+              <TextInputMask accessibilityLabel={ 'birthDateField' } testID={ 'birthDateField' } style={this.dateError ? styles.error : styles.input}
                 type={'datetime'}
                 options={{
                   format: 'DD/MM/YYYY'
@@ -70,12 +72,12 @@ export default class MyComponent extends React.Component {
                 onChangeText={text => {
                   this.setState({
                     dt: text
-                  })
+                  });
+                  this.datetime = text
                 }}
                 label="Birth Date"
                 placeholder = 'dd/mm/yyyy'
                 keyboardType = 'numeric'
-                style={styles.input}
               />
             </View>
              
@@ -110,7 +112,7 @@ export default class MyComponent extends React.Component {
                   <RadioButton accessibilityLabel={ 'radioFieldFemale' } testID={ 'radioFieldFemale' } value="female" />
                 </View>
               </RadioButton.Group>
-              {values.fullName !== '' && values.occupation !== '' && this.dt !== '' && values.city !== '' && values.gender !== '' &&(
+              {values.fullName !== '' && values.occupation !== '' && this.datetime !== '' && values.city !== '' && values.gender !== '' &&(
                 <Button accessibilityLabel={ 'submitButton' } testID={ 'submitButton' } onPress={handleSubmit} style={styles.button}>Submit</Button>
             )}
               </View>
@@ -149,6 +151,10 @@ const styles = StyleSheet.create({
   },
   error: {
     backgroundColor: '#fcacac',
+    color: '#868686',
+    height: 60,
+    borderBottomColor: '#868686',
+    borderBottomWidth: 1,
   },
   input: {
     color: '#868686',
